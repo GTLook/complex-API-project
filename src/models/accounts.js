@@ -1,5 +1,9 @@
 const uuid = require('uuid/v4')
-const accounts = []
+const fs = require('fs')
+const path = require('path')
+const filePath = path.join(__dirname, 'data/data.json')
+const accounts = fs.readFileSync(filePath, 'utf-8')
+
 
 class Account {
   constructor({name, bankName, description}){
@@ -11,7 +15,7 @@ class Account {
   }
 }
 
-function getAll (limit) {
+function getAll(limit) {
   return limit ? accounts.slice(0, limit) : accounts
 }
 
@@ -20,21 +24,18 @@ function show(id){
 }
 
 function create (body) {
-  console.log(body)
   const errors = []
-  // const name = body.name
-  // const
-
     let response
-     if (!(body.name)) errors.push('Your name is required')
-     if (!(body.bankName)) errors.push('Bank name is required')
-     if (!(body.description)) errors.push('Account description is required')
+     if (!(body.name)) errors.push('Your name is required (name)')
+     if (!(body.bankName)) errors.push('Bank name is required (bankName)')
+     if (!(body.description)) errors.push('Account description is required (description)')
     response = { errors }
     if (body.name && body.bankName && body.description) {
     const account = new Account({name: body.name, bankName: body.bankName, description: body.description})
     accounts.push(account)
     response = account
   }
+  fs.writeFileSync(filePath,JSON.stringify(accounts))
   return response
 }
 

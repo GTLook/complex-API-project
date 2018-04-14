@@ -1,13 +1,12 @@
 const uuid = require('uuid/v4')
-const transactions = []
+const transactions = accounts.find(ele => ele.id === id).transactions 
 
 class transaction {
-  constructor({name, bankName, description}){
-    this.name = name
+  constructor({title, amount}){
     this.id = uuid()
-    this.bankName = bankName
-    this.description = description
-    this.transactions = [];
+    this.title = title
+    this.amount = amount
+    this.pending = true
   }
 }
 
@@ -20,18 +19,14 @@ function show(id){
 }
 
 function create (body) {
-  console.log(body)
   const errors = []
-  // const name = body.name
-  // const
 
     let response
-     if (!(body.name)) errors.push('Your name is required')
-     if (!(body.bankName)) errors.push('Bank name is required')
-     if (!(body.description)) errors.push('transaction description is required')
+    if (!(body.title)) errors.push('Transaction title is required (title)')
+    if (!(body.amount)) errors.push('Denomination is required (amount)')
     response = { errors }
     if (body.name && body.bankName && body.description) {
-    const transaction = new Transaction({name: body.name, bankName: body.bankName, description: body.description})
+    const transaction = new Transaction({title: body.title, amount: body.amount})
     transactions.push(transaction)
     response = transaction
   }

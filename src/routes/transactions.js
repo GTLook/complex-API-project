@@ -4,8 +4,8 @@ const ctrl = require('../controllers/transactions')
 
 router.get('/', ctrl.getAll)
 router.post('/', ctrl.create)
-router.get('/:id', ctrl.show)
-router.put('/:id', ctrl.modify)
-router.delete('/:id', ctrl.remove)
+router.get('/:transactionId', ctrl.show)
+router.put('/:transactionId', ctrl.modify)
+router.delete('/:transactionId', ctrl.remove)
 
 module.exports = router

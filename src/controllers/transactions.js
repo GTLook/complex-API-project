@@ -14,9 +14,7 @@ function show (request, response, next) {
 
 function create (request, response, next) {
   const result = model.create(request.body)
-  if (result.errors) {
-    return next({ status: 400, message: `Could not create new transaction`, errors: result.errors })
-  }
+  if (result.errors) return next({ status: 400, message: `Could not create new transaction`, errors: result.errors })
   response.status(201).json({ data: result })
 }
 
