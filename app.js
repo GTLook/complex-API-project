@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 const accountRoutes = require('./src/routes/accounts')
 app.use('/accounts', accountRoutes)
 const transactionRoutes = require('./src/routes/transactions')
-app.use('/accounts/:id/transactions', transactionRoutes)
+app.use('/accounts', transactionRoutes)
 
 
 app.use((err, req, res, next) => {
@@ -21,10 +21,6 @@ app.use((err, req, res, next) => {
   const status = err.status || 500
   res.status(status).json({ error: err })
 })
-
-// app.use((req, res, next) => {
-//   res.status(404).json({ error: { message: 'Not found' }})
-// })
 
 const listener = () => console.log(`Listening on port ${port}!`)
 app.listen(port, listener)

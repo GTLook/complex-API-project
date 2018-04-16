@@ -42,11 +42,14 @@ function create (body) {
 function modify(id, body){
   const obj = accounts.find(ele => ele.id === id)
   obj.data.name = body
+  fs.writeFileSync(filePath,JSON.stringify(accounts))
   return obj
 }
 
 function remove(id){
-  return data.splice(data.indexOf(accounts.find(ele => ele.id === id)),1)
+  const removed = data.splice(data.indexOf(accounts.find(ele => ele.id === id)),1)
+  fs.writeFileSync(filePath,JSON.stringify(accounts))
+  return removed
 }
 
 
