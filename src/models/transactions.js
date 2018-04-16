@@ -1,5 +1,11 @@
 const uuid = require('uuid/v4')
-const transactions = accounts.find(ele => ele.id === id).transactions 
+const fs = require('fs')
+const path = require('path')
+const filePath = path.join(__dirname, 'data.json')
+const accounts = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+const transactions = accounts.find(ele => ele.id === id).transactions
+//const transactions = []
+//accounts.find(ele => ele.id === id).transactions
 
 class transaction {
   constructor({title, amount}){

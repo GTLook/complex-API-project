@@ -1,8 +1,8 @@
 const uuid = require('uuid/v4')
 const fs = require('fs')
 const path = require('path')
-const filePath = path.join(__dirname, 'data/data.json')
-const accounts = fs.readFileSync(filePath, 'utf-8')
+const filePath = path.join(__dirname, 'data.json')
+const accounts = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
 
 
 class Account {
